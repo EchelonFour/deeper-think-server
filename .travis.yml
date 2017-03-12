@@ -16,7 +16,7 @@ cache:
 
 script: ./gradlew distDocker
 after_success:
-  - docker tag $(docker images echelonfour/deeper-think-server --filter "{{.ID}}") echelonfour/deeper-think-server:latest
+  - docker tag $(docker images echelonfour/deeper-think-server --format "{{.ID}}" | sed -n -e '1{p;q}') echelonfour/deeper-think-server:latest
 
 before_deploy:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
