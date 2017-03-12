@@ -16,8 +16,10 @@ cache:
 
 script: ./gradlew distDocker
 
+before_deploy:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 deploy:
   provider: script
-  script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push echelonfour/deeper-think-server
+  script: docker push echelonfour/deeper-think-server
   on:
     branch: master
